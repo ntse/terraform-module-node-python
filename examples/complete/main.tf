@@ -5,7 +5,7 @@ module "web_app" {
   backend_image      = "image.bar"
   public_subnet_ids  = module.vpc.public_subnets
   private_subnet_ids = module.vpc.private_subnets
-  vpc_id             = module.vpc.default_vpc_id
+  vpc_id             = module.vpc.vpc_id
   service_name       = "demo"
   domain_name        = "foo"
 
