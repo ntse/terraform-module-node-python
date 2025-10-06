@@ -105,7 +105,9 @@ jobs:
           terraform_version: 1.13.3
 
       - name: Terraform Test
-        run: terraform test -no-color
+        run: |
+            terraform -input=false 
+            terraform test -no-color
 
       - name: Set up Python
         uses: actions/setup-python@v6
