@@ -39,7 +39,7 @@ resource "aws_secretsmanager_secret" "django" {
 }
 
 resource "aws_secretsmanager_secret_version" "example" {
-  secret_id     = aws_secretsmanager_secret.database.id
+  secret_id = aws_secretsmanager_secret.database.id
   secret_string = jsonencode({
     DB_USER = "username"
     DB_PASS = "super-secret-password"
