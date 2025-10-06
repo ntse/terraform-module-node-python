@@ -10,6 +10,25 @@ mock_provider "aws" {
       id = "pl-123456"
     }
   }
+
+  mock_data "aws_iam_policy_document" {
+    defaults = {
+      json = <<JSON
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+JSON
+    }
+  }
 }
 
 mock_provider "random" {}
