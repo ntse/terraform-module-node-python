@@ -219,19 +219,6 @@ variable "off_hours_desired_count" {
   default     = 0
 }
 
-variable "cloudfront_certificate_arn" {
-  description = "ACM certificate ARN (us-east-1) for the CloudFront distribution aliases."
-  type        = string
-
-  validation {
-    condition = (
-      var.cloudfront_certificate_arn != null &&
-      can(regex(":us-east-1:", var.cloudfront_certificate_arn))
-    )
-    error_message = "Provide a us-east-1 ACM certificate ARN via cloudfront_certificate_arn."
-  }
-}
-
 variable "cloudfront_price_class" {
   description = "Price class for the frontend CloudFront distribution."
   type        = string

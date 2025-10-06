@@ -34,7 +34,6 @@ module "app" {
   domain_name         = "example.com"
   frontend_image      = "123456789012.dkr.ecr.us-east-1.amazonaws.com/frontend:latest"
   backend_image       = "123456789012.dkr.ecr.us-east-1.amazonaws.com/backend:latest"
-  cloudfront_certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/app-domain"
 
   media_bucket_force_destroy = false
 
@@ -59,7 +58,6 @@ The module exposes the ALB DNS name and ECS service identifiers so you can integ
 | `create_www_record` | Create a `www.` alias alongside the apex frontend record. | `bool` | `true` | no |
 | `frontend_image` | Container image for the Next.js frontend. | `string` | n/a | yes |
 | `backend_image` | Container image for the Python backend. | `string` | n/a | yes |
-| `cloudfront_certificate_arn` | ACM certificate ARN (us-east-1) covering apex, `www`, `api`, and `cdn` hostnames. | `string` | n/a | yes |
 | `frontend_port` | Container port exposed by the frontend. | `number` | `3000` | no |
 | `backend_port` | Container port exposed by the backend. | `number` | `8000` | no |
 | `frontend_desired_count` | Desired number of frontend tasks. | `number` | `2` | no |
@@ -120,7 +118,6 @@ The module exposes the ALB DNS name and ECS service identifiers so you can integ
 ## Notes
 
 - Delegate the domain to Route53 by updating your registrar with the `hosted_zone_name_servers` output after the first apply.
-- Supply a us-east-1 ACM certificate ARN via `cloudfront_certificate_arn`; it must cover apex, `www`, `api`, and `cdn` hostnames.
 - The module provisions and validates an ACM certificate for the ALB automatically unless you provide `certificate_arn`.
 - The backend container receives media bucket information (`MEDIA_BUCKET_NAME`, `MEDIA_CLOUDFRONT_URL`) and the frontend container receives API host variables out of the box.
 - Database resources remain outside the module's scope.
